@@ -224,7 +224,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb12-16"><a href="net-equity-expansion.html#cb12-16" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
 <span id="cb12-17"><a href="net-equity-expansion.html#cb12-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.table</span>() <span class="sc">%&gt;%</span> </span>
 <span id="cb12-18"><a href="net-equity-expansion.html#cb12-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">na.omit</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb12-19"><a href="net-equity-expansion.html#cb12-19" aria-hidden="true" tabindex="-1"></a>  .[, .(<span class="at">tradingmonth =</span> <span class="fu">ceiling_date</span>(tradingmonth, <span class="st">&quot;m&quot;</span>) <span class="sc">-</span> <span class="fu">days</span>(<span class="dv">1</span>), <span class="at">ntis =</span> ntis <span class="sc">/</span> (cmmvosd <span class="sc">*</span> <span class="dv">1000</span>))] </span></code></pre></div>
+<span id="cb12-19"><a href="net-equity-expansion.html#cb12-19" aria-hidden="true" tabindex="-1"></a>  .[, .(<span class="at">tradingmonth =</span> <span class="fu">ceiling_date</span>(tradingmonth, <span class="st">&quot;m&quot;</span>) <span class="sc">-</span> <span class="fu">days</span>(<span class="dv">1</span>), <span class="at">ntis =</span> ntis <span class="sc">/</span> (cmmvosd <span class="sc">*</span> <span class="dv">1000</span>))] </span>
+<span id="cb12-20"><a href="net-equity-expansion.html#cb12-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&lt; Write to the local database</span></span>
+<span id="cb12-21"><a href="net-equity-expansion.html#cb12-21" aria-hidden="true" tabindex="-1"></a><span class="fu">dbWriteTable</span>(conn_macro,</span>
+<span id="cb12-22"><a href="net-equity-expansion.html#cb12-22" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;ntis_m_csmar&quot;</span>,</span>
+<span id="cb12-23"><a href="net-equity-expansion.html#cb12-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">value =</span> ntis_m_csmar,</span>
+<span id="cb12-24"><a href="net-equity-expansion.html#cb12-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">overwrite =</span> <span class="cn">TRUE</span></span>
+<span id="cb12-25"><a href="net-equity-expansion.html#cb12-25" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 
 </div>
 </div>

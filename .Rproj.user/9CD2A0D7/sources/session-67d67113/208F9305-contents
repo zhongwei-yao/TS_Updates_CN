@@ -58,5 +58,4 @@ dbWriteTable(conn_macro,
     value = marketret_m_csmar,
     overwrite = TRUE
   )
-
 ```

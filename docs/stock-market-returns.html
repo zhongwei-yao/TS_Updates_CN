@@ -244,7 +244,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb4-9"><a href="stock-market-returns.html#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-10"><a href="stock-market-returns.html#cb4-10" aria-hidden="true" tabindex="-1"></a>marketret_m_csmar <span class="ot">&lt;-</span> <span class="fu">unnest</span>(marketret_m_ds, <span class="fu">everything</span>()) <span class="sc">%&gt;%</span> </span>
 <span id="cb4-11"><a href="stock-market-returns.html#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">marketret_m_backward_1m =</span> cmretwdos) <span class="sc">%&gt;%</span> </span>
-<span id="cb4-12"><a href="stock-market-returns.html#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">tradingmonth =</span> <span class="fu">ceiling_date</span>(tradingmonth, <span class="st">&quot;m&quot;</span>) <span class="sc">-</span><span class="fu">days</span>(<span class="dv">1</span>))</span></code></pre></div>
+<span id="cb4-12"><a href="stock-market-returns.html#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">tradingmonth =</span> <span class="fu">ceiling_date</span>(tradingmonth, <span class="st">&quot;m&quot;</span>) <span class="sc">-</span><span class="fu">days</span>(<span class="dv">1</span>))</span>
+<span id="cb4-13"><a href="stock-market-returns.html#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-14"><a href="stock-market-returns.html#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&lt; Write to the local database</span></span>
+<span id="cb4-15"><a href="stock-market-returns.html#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="fu">dbWriteTable</span>(conn_macro,</span>
+<span id="cb4-16"><a href="stock-market-returns.html#cb4-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;marketret_m_csmar&quot;</span>,</span>
+<span id="cb4-17"><a href="stock-market-returns.html#cb4-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">value =</span> marketret_m_csmar,</span>
+<span id="cb4-18"><a href="stock-market-returns.html#cb4-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">overwrite =</span> <span class="cn">TRUE</span></span>
+<span id="cb4-19"><a href="stock-market-returns.html#cb4-19" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 
 </div>
 </div>

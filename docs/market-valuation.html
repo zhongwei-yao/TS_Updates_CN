@@ -204,7 +204,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">7.1</span> D/P, E/P, B/M<a href="market-valuation.html#dp-ep-bm" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="market-valuation.html#cb19-1" aria-hidden="true" tabindex="-1"></a>market_valuation_m_wind <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_xlsx</span>(mv_path, <span class="st">&quot;WINDA&quot;</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb19-2"><a href="market-valuation.html#cb19-2" aria-hidden="true" tabindex="-1"></a>      <span class="fu">mutate</span>(<span class="at">tradingmonth =</span> <span class="fu">ymd</span>(<span class="fu">ceiling_date</span>(ymd, <span class="st">&quot;month&quot;</span>) <span class="sc">-</span> <span class="fu">days</span>(<span class="dv">1</span>)), <span class="at">ep_winda =</span> <span class="dv">1</span> <span class="sc">/</span> pe, <span class="at">bp_winda =</span> <span class="dv">1</span> <span class="sc">/</span> pb, <span class="at">dp_winda =</span> dp) <span class="sc">%&gt;%</span> </span>
-<span id="cb19-3"><a href="market-valuation.html#cb19-3" aria-hidden="true" tabindex="-1"></a>      <span class="fu">select</span>(tradingmonth, ep_winda, bp_winda, dp_winda, <span class="at">pe_winda =</span> pe, <span class="at">pb_winda =</span> pb) </span></code></pre></div>
+<span id="cb19-3"><a href="market-valuation.html#cb19-3" aria-hidden="true" tabindex="-1"></a>      <span class="fu">select</span>(tradingmonth, ep_winda, bp_winda, dp_winda, <span class="at">pe_winda =</span> pe, <span class="at">pb_winda =</span> pb) </span>
+<span id="cb19-4"><a href="market-valuation.html#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-5"><a href="market-valuation.html#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&lt; Write to the local database</span></span>
+<span id="cb19-6"><a href="market-valuation.html#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="fu">dbWriteTable</span>(conn_macro,</span>
+<span id="cb19-7"><a href="market-valuation.html#cb19-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;market_valuation_m_wind&quot;</span>,</span>
+<span id="cb19-8"><a href="market-valuation.html#cb19-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">value =</span> market_valuation_m_wind,</span>
+<span id="cb19-9"><a href="market-valuation.html#cb19-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">overwrite =</span> <span class="cn">TRUE</span></span>
+<span id="cb19-10"><a href="market-valuation.html#cb19-10" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 
 </div>
 </div>

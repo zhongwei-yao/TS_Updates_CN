@@ -220,7 +220,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb6-12"><a href="market-volatility.html#cb6-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> </span>
 <span id="cb6-13"><a href="market-volatility.html#cb6-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">na.omit</span>() <span class="sc">%&gt;%</span> </span>
 <span id="cb6-14"><a href="market-volatility.html#cb6-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">tradingmonth =</span> <span class="fu">ceiling_date</span>(tradingdate, <span class="st">&quot;m&quot;</span>) <span class="sc">-</span> <span class="fu">days</span>(<span class="dv">1</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb6-15"><a href="market-volatility.html#cb6-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(tradingmonth, svar)</span></code></pre></div>
+<span id="cb6-15"><a href="market-volatility.html#cb6-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(tradingmonth, svar)</span>
+<span id="cb6-16"><a href="market-volatility.html#cb6-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-17"><a href="market-volatility.html#cb6-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-18"><a href="market-volatility.html#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&lt; Write to the local database</span></span>
+<span id="cb6-19"><a href="market-volatility.html#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="fu">dbWriteTable</span>(conn_macro,</span>
+<span id="cb6-20"><a href="market-volatility.html#cb6-20" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;market_svar_m_csmar&quot;</span>,</span>
+<span id="cb6-21"><a href="market-volatility.html#cb6-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">value =</span> market_svar_m_csmar,</span>
+<span id="cb6-22"><a href="market-volatility.html#cb6-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">overwrite =</span> <span class="cn">TRUE</span></span>
+<span id="cb6-23"><a href="market-volatility.html#cb6-23" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 
 </div>
 </div>

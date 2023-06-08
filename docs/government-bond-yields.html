@@ -230,10 +230,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="termspread" class="section level2 hasAnchor" number="6.4">
 <h2><span class="header-section-number">6.4</span> Termspread<a href="government-bond-yields.html#termspread" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="government-bond-yields.html#cb17-1" aria-hidden="true" tabindex="-1"></a>termspread_m_cb <span class="ot">&lt;-</span> lty_10yr <span class="sc">%&gt;%</span> </span>
-<span id="cb17-2"><a href="government-bond-yields.html#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(sty_3m) <span class="sc">%&gt;%</span> </span>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="government-bond-yields.html#cb17-1" aria-hidden="true" tabindex="-1"></a>termspread_m_cb <span class="ot">&lt;-</span> lty_10yr_m_cb <span class="sc">%&gt;%</span> </span>
+<span id="cb17-2"><a href="government-bond-yields.html#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(sty_3m_m_cb) <span class="sc">%&gt;%</span> </span>
 <span id="cb17-3"><a href="government-bond-yields.html#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">termspread =</span> lty <span class="sc">-</span> sty) <span class="sc">%&gt;%</span> </span>
-<span id="cb17-4"><a href="government-bond-yields.html#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(tradingmonth, termspread)</span></code></pre></div>
+<span id="cb17-4"><a href="government-bond-yields.html#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(tradingmonth, termspread)</span>
+<span id="cb17-5"><a href="government-bond-yields.html#cb17-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-6"><a href="government-bond-yields.html#cb17-6" aria-hidden="true" tabindex="-1"></a>gby_m_cb <span class="ot">&lt;-</span> sty_3m_m_cb <span class="sc">%&gt;%</span> </span>
+<span id="cb17-7"><a href="government-bond-yields.html#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(lty_10yr_m_cb) <span class="sc">%&gt;%</span> </span>
+<span id="cb17-8"><a href="government-bond-yields.html#cb17-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(termspread_m_cb)</span>
+<span id="cb17-9"><a href="government-bond-yields.html#cb17-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-10"><a href="government-bond-yields.html#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&lt; Write to the local database</span></span>
+<span id="cb17-11"><a href="government-bond-yields.html#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="fu">dbWriteTable</span>(conn_macro,</span>
+<span id="cb17-12"><a href="government-bond-yields.html#cb17-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;gby_m_cb&quot;</span>,</span>
+<span id="cb17-13"><a href="government-bond-yields.html#cb17-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">value =</span> gby_m_cb,</span>
+<span id="cb17-14"><a href="government-bond-yields.html#cb17-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">overwrite =</span> <span class="cn">TRUE</span></span>
+<span id="cb17-15"><a href="government-bond-yields.html#cb17-15" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 
 </div>
 </div>
