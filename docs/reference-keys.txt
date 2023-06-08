@@ -22,4 +22,12 @@ long-term-yield-10yr
 termspread
 market-valuation
 dp-ep-bm
+risk-factors
+file-path-5
+factor-returns
+ff3
+cumulative-ff3-returns-forward
+ffc4
+lsy4
+ff5
 merge-data

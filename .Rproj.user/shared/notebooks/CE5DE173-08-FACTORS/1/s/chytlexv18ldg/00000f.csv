@@ -1,0 +1,6 @@
+"0","ch4_m_csmar <- data.table::fread(ch4_m_path) %>% "
+"0","  tibble() %>% "
+"0","  setlowercolnames() %>% "
+"0","  filter(markettypeid == ""P9714"") %>% "
+"0","  select(tradingmonth,rp_ch4=riskpremium1,smb_ch4=smb1, hml_ch4 = hml1, umd_ch4 = umd1) %>% "
+"0","  mutate(tradingmonth = ymd(str_c(tradingmonth, ""-01""))) "

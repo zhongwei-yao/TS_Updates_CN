@@ -1536,7 +1536,12 @@ margin-left: 0 !important;
           <ul>
           <li><a href="#dp-ep-bm" id="toc-dp-ep-bm"><span class="toc-section-number">7.1</span> D/P, E/P, B/M</a></li>
           </ul></li>
-          <li><a href="#merge-data" id="toc-merge-data"><span class="toc-section-number">8</span> Merge data</a></li>
+          <li><a href="#risk-factors" id="toc-risk-factors"><span class="toc-section-number">8</span> Risk factors</a>
+          <ul>
+          <li><a href="#file-path-5" id="toc-file-path-5"><span class="toc-section-number">8.1</span> File path</a></li>
+          <li><a href="#factor-returns" id="toc-factor-returns"><span class="toc-section-number">8.2</span> Factor returns</a></li>
+          </ul></li>
+          <li><a href="#merge-data" id="toc-merge-data"><span class="toc-section-number">9</span> Merge data</a></li>
           </ul>
         </nav>
         <ul class="authors">
@@ -1694,17 +1699,19 @@ margin-left: 0 !important;
 </div>
 <div id="monthly-cpi-month-to-month" class="section level2" number="4.2">
 <h2><span class="header-section-number">4.2</span> Monthly CPI month-to-month</h2>
-<p>Datasgn [数据标识] - PYM＝上年同月为基期, PYP＝上年同期为基期.
-Areasgn [地区标识] - 1=全国，2=城镇，3=农村
-Epim0101 [居民消费价格指数] -
-Epim0102 [居民消费价格指数-食品] -
-Epim0103 [居民消费价格指数-烟酒及用品] -
-Epim0104 [居民消费价格指数-衣着] -
-Epim0105 [居民消费价格指数-家庭设备用品及服务] -
-Epim0106 [居民消费价格指数-医疗保健及个人用品] -
-Epim0107 [居民消费价格指数-交通和通信] -
-Epim0108 [居民消费价格指数-娱乐教育文化用品及服务] -
-Epim0109 [居民消费价格指数-居住] -</p>
+<ul>
+<li><p>Datasgn [数据标识] - PYM＝上年同月为基期, PYP＝上年同期为基期.</p></li>
+<li><p>Areasgn [地区标识] - 1=全国，2=城镇，3=农村</p></li>
+<li><p>Epim0101 [居民消费价格指数] -</p></li>
+<li><p>Epim0102 [居民消费价格指数-食品] -</p></li>
+<li><p>Epim0103 [居民消费价格指数-烟酒及用品] -</p></li>
+<li><p>Epim0104 [居民消费价格指数-衣着] -</p></li>
+<li><p>Epim0105 [居民消费价格指数-家庭设备用品及服务] -</p></li>
+<li><p>Epim0106 [居民消费价格指数-医疗保健及个人用品] -</p></li>
+<li><p>Epim0107 [居民消费价格指数-交通和通信] -</p></li>
+<li><p>Epim0108 [居民消费价格指数-娱乐教育文化用品及服务] -</p></li>
+<li><p>Epim0109 [居民消费价格指数-居住] -</p></li>
+</ul>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>cpi_m_csmar <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_xlsx</span>(cpi_path) <span class="sc">%&gt;%</span> </span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">3</span><span class="sc">:</span><span class="fu">n</span>()) <span class="sc">%&gt;%</span> </span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Areasgn <span class="sc">==</span> <span class="dv">1</span>, Datasgn <span class="sc">==</span> <span class="st">&quot;PYM&quot;</span>) <span class="sc">%&gt;%</span> </span>
@@ -1834,18 +1841,98 @@ Epim0109 [居民消费价格指数-居住] -</p>
 <!--chapter:end:07-VALUATION.Rmd-->
 </div>
 </div>
-<div id="merge-data" class="section level1" number="8">
-<h1><span class="header-section-number">8</span> Merge data</h1>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>econ_var_m <span class="ot">&lt;-</span> marketret_m_csmar <span class="sc">%&gt;%</span> </span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(market_svar_m_csmar) <span class="sc">%&gt;%</span> </span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(market_turnover_m_csmar) <span class="sc">%&gt;%</span> </span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(cpi_m_csmar) <span class="sc">%&gt;%</span> </span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(ntis_m_csmar) <span class="sc">%&gt;%</span> </span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(sty_3m_m_cb) <span class="sc">%&gt;%</span> </span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(lty_10yr_m_cb) <span class="sc">%&gt;%</span> </span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(termspread_m_cb) <span class="sc">%&gt;%</span> </span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(market_valuation_m_wind) <span class="sc">%&gt;%</span> </span>
-<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.table</span>()</span></code></pre></div>
+<div id="risk-factors" class="section level1" number="8">
+<h1><span class="header-section-number">8</span> Risk factors</h1>
+<div id="file-path-5" class="section level2" number="8.1">
+<h2><span class="header-section-number">8.1</span> File path</h2>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>ff3_m_path <span class="ot">&lt;-</span> <span class="st">&quot;/Volumes/Samsung_T7/Research/Database/CSMAR/因子研究系列/Fama-French因子/STK_MKT_THRFACMONTH1990-12 至 2023-03.txt&quot;</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>ff3_d_path <span class="ot">&lt;-</span> <span class="st">&quot;/Volumes/Samsung_T7/Research/Database/CSMAR/因子研究系列/Fama-French因子/STK_MKT_THRFACDAY1990-12-19 至 2023-04-19.txt&quot;</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>ff5_m_path <span class="ot">&lt;-</span> <span class="st">&quot;/Volumes/Samsung_T7/Research/Database/CSMAR/因子研究系列/Fama-French因子/STK_MKT_FIVEFACMONTH1994-01 至 2023-03.txt&quot;</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>ff5_d_path <span class="ot">&lt;-</span> <span class="st">&quot;/Volumes/Samsung_T7/Research/Database/CSMAR/因子研究系列/Fama-French因子/STK_MKT_FIVEFACDAY1994-01-03 至 2023-04-19.txt&quot;</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>ch4_m_path <span class="ot">&lt;-</span> <span class="st">&quot;/Volumes/Samsung_T7/Research/Database/CSMAR/因子研究系列/动量因子/STK_MKT_CARHARTFOURFACTORS1990-12 至 2023-03.txt&quot;</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>cn4_m_path <span class="ot">&lt;-</span> <span class="st">&quot;/Volumes/Samsung_T7/Research/Database/CSMAR/因子研究系列/CH_4_fac_update_20211231.csv&quot;</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>cn4_d_path <span class="ot">&lt;-</span> <span class="st">&quot;/Volumes/Samsung_T7/Research/Database/CSMAR/因子研究系列/CH_4_fac_daily_update_20211231.csv&quot;</span></span></code></pre></div>
+</div>
+<div id="factor-returns" class="section level2" number="8.2">
+<h2><span class="header-section-number">8.2</span> Factor returns</h2>
+<div id="ff3" class="section level3" number="8.2.1">
+<h3><span class="header-section-number">8.2.1</span> FF3</h3>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>ff3_m_csmar <span class="ot">&lt;-</span> data.table<span class="sc">::</span><span class="fu">fread</span>(ff3_m_path) <span class="sc">%&gt;%</span> </span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tibble</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">setlowercolnames</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(markettypeid <span class="sc">==</span> <span class="st">&quot;P9714&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(tradingmonth, <span class="at">rp_ff3 =</span> riskpremium1, <span class="at">smb_ff3 =</span> smb1, <span class="at">hml_ff3 =</span> hml1) <span class="sc">%&gt;%</span> </span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">tradingmonth =</span> <span class="fu">ymd</span>(<span class="fu">str_c</span>(tradingmonth, <span class="st">&quot;-01&quot;</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(tradingmonth)</span></code></pre></div>
+<div id="cumulative-ff3-returns-forward" class="section level4" number="8.2.1.1">
+<h4><span class="header-section-number">8.2.1.1</span> Cumulative FF3 returns: Forward</h4>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">36</span>, <span class="dv">1</span>)){</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  ff3_m_csmar <span class="ot">&lt;-</span> <span class="fu">bind_cols</span>(</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    ff3_m_csmar,</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tibble</span>(</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;hml_ff3_m_forward_{{i}}m&quot;</span> <span class="sc">:</span><span class="er">=</span> <span class="fu">slide_period</span>(ff3_m_csmar<span class="sc">$</span>hml_ff3, ff3_m_csmar<span class="sc">$</span>tradingmonth, <span class="at">.period =</span> <span class="st">&quot;month&quot;</span>, <span class="at">.before =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">.after =</span> i, <span class="at">.complete =</span> T, <span class="at">.f =</span> <span class="sc">~</span><span class="fu">prod</span>(<span class="dv">1</span><span class="sc">+</span>.x) <span class="sc">-</span> <span class="dv">1</span>)</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>ff3_m_csmar <span class="ot">&lt;-</span> <span class="fu">unnest</span>(ff3_m_csmar, <span class="fu">everything</span>()) <span class="sc">%&gt;%</span> </span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">tradingmonth =</span> <span class="fu">ceiling_date</span>(tradingmonth, <span class="st">&quot;m&quot;</span>) <span class="sc">-</span><span class="fu">days</span>(<span class="dv">1</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(tradingmonth <span class="sc">&gt;=</span> <span class="st">&quot;2000-01-01&quot;</span>)</span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&lt; Write to the local database</span></span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a><span class="fu">dbWriteTable</span>(conn_macro,</span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;ff3_m_csmar&quot;</span>,</span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">value =</span> ff3_m_csmar,</span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">overwrite =</span> <span class="cn">TRUE</span></span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+</div>
+</div>
+<div id="ffc4" class="section level3" number="8.2.2">
+<h3><span class="header-section-number">8.2.2</span> FFC4</h3>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>ch4_m_csmar <span class="ot">&lt;-</span> data.table<span class="sc">::</span><span class="fu">fread</span>(ch4_m_path) <span class="sc">%&gt;%</span> </span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tibble</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">setlowercolnames</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(markettypeid <span class="sc">==</span> <span class="st">&quot;P9714&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(tradingmonth,<span class="at">rp_ch4=</span>riskpremium1,<span class="at">smb_ch4=</span>smb1, <span class="at">hml_ch4 =</span> hml1, <span class="at">umd_ch4 =</span> umd1) <span class="sc">%&gt;%</span> </span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">tradingmonth =</span> <span class="fu">ymd</span>(<span class="fu">str_c</span>(tradingmonth, <span class="st">&quot;-01&quot;</span>))) </span></code></pre></div>
+</div>
+<div id="lsy4" class="section level3" number="8.2.3">
+<h3><span class="header-section-number">8.2.3</span> LSY4</h3>
+<p>来源：<a href="https://finance.wharton.upenn.edu/~stambaug/" class="uri">https://finance.wharton.upenn.edu/~stambaug/</a></p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>cn4_m_lsy <span class="ot">&lt;-</span> data.table<span class="sc">::</span><span class="fu">fread</span>(cn4_m_path, <span class="at">skip =</span> <span class="dv">9</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">setlowercolnames</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">tradingmonth =</span> <span class="fu">floor_date</span>(<span class="fu">ymd</span>(mnthdt), <span class="at">unit =</span> <span class="st">&quot;m&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>mnthdt) <span class="sc">%&gt;%</span> </span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 注：原因子收益单位为%</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_at</span>(<span class="fu">vars</span>(rf_mon<span class="sc">:</span>pmo), <span class="sc">~</span>.x<span class="sc">/</span><span class="dv">100</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(tradingmonth, <span class="at">mrf =</span> rf_mon, <span class="at">rp_cn4 =</span> mktrf, <span class="at">vmg_cn4 =</span> vmg, <span class="at">smb_cn4 =</span> smb, <span class="at">pmo_cn4 =</span> pmo)</span></code></pre></div>
+</div>
+<div id="ff5" class="section level3" number="8.2.4">
+<h3><span class="header-section-number">8.2.4</span> FF5</h3>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>ff5_m_csmar <span class="ot">&lt;-</span> data.table<span class="sc">::</span><span class="fu">fread</span>(ff5_m_path) <span class="sc">%&gt;%</span> </span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tibble</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">setlowercolnames</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(markettypeid <span class="sc">==</span> <span class="st">&quot;P9714&quot;</span>, portfolios <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(tradingmonth,<span class="at">rp_ff5=</span>riskpremium1,<span class="at">smb_ff5=</span>smb1,<span class="at">hml_ff5 =</span> hml1,<span class="at">rmw_ff5 =</span> rmw1,<span class="at">cma_ff5 =</span> cma1) <span class="sc">%&gt;%</span> </span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">tradingmonth =</span> <span class="fu">ymd</span>(<span class="fu">str_c</span>(tradingmonth, <span class="st">&quot;-01&quot;</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(tradingmonth)</span></code></pre></div>
+<!--chapter:end:08-FACTORS.Rmd-->
+</div>
+</div>
+</div>
+<div id="merge-data" class="section level1" number="9">
+<h1><span class="header-section-number">9</span> Merge data</h1>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>econ_var_m <span class="ot">&lt;-</span> marketret_m_csmar <span class="sc">%&gt;%</span> </span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(market_svar_m_csmar) <span class="sc">%&gt;%</span> </span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(market_turnover_m_csmar) <span class="sc">%&gt;%</span> </span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(cpi_m_csmar) <span class="sc">%&gt;%</span> </span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(ntis_m_csmar) <span class="sc">%&gt;%</span> </span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(sty_3m_m_cb) <span class="sc">%&gt;%</span> </span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(lty_10yr_m_cb) <span class="sc">%&gt;%</span> </span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(termspread_m_cb) <span class="sc">%&gt;%</span> </span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(market_valuation_m_wind) <span class="sc">%&gt;%</span> </span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.table</span>()</span></code></pre></div>
 <!--chapter:end:99-MERGE.Rmd-->
 </div>
 

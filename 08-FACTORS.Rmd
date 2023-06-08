@@ -1,0 +1,94 @@
+# Risk factors
+
+
+## File path
+
+```{r factor_path}
+ff3_m_path <- "/Volumes/Samsung_T7/Research/Database/CSMAR/因子研究系列/Fama-French因子/STK_MKT_THRFACMONTH1990-12 至 2023-03.txt"
+ff3_d_path <- "/Volumes/Samsung_T7/Research/Database/CSMAR/因子研究系列/Fama-French因子/STK_MKT_THRFACDAY1990-12-19 至 2023-04-19.txt"
+ff5_m_path <- "/Volumes/Samsung_T7/Research/Database/CSMAR/因子研究系列/Fama-French因子/STK_MKT_FIVEFACMONTH1994-01 至 2023-03.txt"
+ff5_d_path <- "/Volumes/Samsung_T7/Research/Database/CSMAR/因子研究系列/Fama-French因子/STK_MKT_FIVEFACDAY1994-01-03 至 2023-04-19.txt"
+ch4_m_path <- "/Volumes/Samsung_T7/Research/Database/CSMAR/因子研究系列/动量因子/STK_MKT_CARHARTFOURFACTORS1990-12 至 2023-03.txt"
+cn4_m_path <- "/Volumes/Samsung_T7/Research/Database/CSMAR/因子研究系列/CH_4_fac_update_20211231.csv"
+cn4_d_path <- "/Volumes/Samsung_T7/Research/Database/CSMAR/因子研究系列/CH_4_fac_daily_update_20211231.csv"
+```
+
+## Factor returns
+
+### FF3
+
+```{r ff3}
+ff3_m_csmar <- data.table::fread(ff3_m_path) %>% 
+  tibble() %>% 
+  setlowercolnames() %>% 
+  filter(markettypeid == "P9714") %>% 
+  select(tradingmonth, rp_ff3 = riskpremium1, smb_ff3 = smb1, hml_ff3 = hml1) %>% 
+  mutate(tradingmonth = ymd(str_c(tradingmonth, "-01"))) %>% 
+  arrange(tradingmonth)
+```
+
+
+#### Cumulative FF3 returns: Forward
+
+```{r ff3ret_ahead}
+for (i in seq(1, 36, 1)){
+  ff3_m_csmar <- bind_cols(
+    ff3_m_csmar,
+    tibble(
+      "hml_ff3_m_forward_{{i}}m" := slide_period(ff3_m_csmar$hml_ff3, ff3_m_csmar$tradingmonth, .period = "month", .before = -1, .after = i, .complete = T, .f = ~prod(1+.x) - 1)
+    )
+  )
+}
+
+ff3_m_csmar <- unnest(ff3_m_csmar, everything()) %>% 
+  mutate(tradingmonth = ceiling_date(tradingmonth, "m") -days(1)) %>% 
+  filter(tradingmonth >= "2000-01-01")
+
+#< Write to the local database
+dbWriteTable(conn_macro,
+    "ff3_m_csmar",
+    value = ff3_m_csmar,
+    overwrite = TRUE
+  )
+```
+
+
+
+### FFC4
+
+```{r ffc4}
+ch4_m_csmar <- data.table::fread(ch4_m_path) %>% 
+  tibble() %>% 
+  setlowercolnames() %>% 
+  filter(markettypeid == "P9714") %>% 
+  select(tradingmonth,rp_ch4=riskpremium1,smb_ch4=smb1, hml_ch4 = hml1, umd_ch4 = umd1) %>% 
+  mutate(tradingmonth = ymd(str_c(tradingmonth, "-01"))) 
+```
+
+### LSY4
+
+来源：https://finance.wharton.upenn.edu/~stambaug/
+
+```{r lsy4}
+cn4_m_lsy <- data.table::fread(cn4_m_path, skip = 9) %>% 
+  as_tibble() %>% 
+  setlowercolnames() %>% 
+  mutate(tradingmonth = floor_date(ymd(mnthdt), unit = "m")) %>% 
+  select(-mnthdt) %>% 
+  # 注：原因子收益单位为%
+  mutate_at(vars(rf_mon:pmo), ~.x/100) %>%
+  select(tradingmonth, mrf = rf_mon, rp_cn4 = mktrf, vmg_cn4 = vmg, smb_cn4 = smb, pmo_cn4 = pmo)
+
+```
+
+### FF5
+
+```{r ff5}
+ff5_m_csmar <- data.table::fread(ff5_m_path) %>% 
+  tibble() %>% 
+  setlowercolnames() %>% 
+  filter(markettypeid == "P9714", portfolios == 1) %>% 
+  select(tradingmonth,rp_ff5=riskpremium1,smb_ff5=smb1,hml_ff5 = hml1,rmw_ff5 = rmw1,cma_ff5 = cma1) %>% 
+  mutate(tradingmonth = ymd(str_c(tradingmonth, "-01"))) %>% 
+  arrange(tradingmonth)
+```

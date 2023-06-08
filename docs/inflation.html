@@ -176,7 +176,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="7.1" data-path="market-valuation.html"><a href="market-valuation.html#dp-ep-bm"><i class="fa fa-check"></i><b>7.1</b> D/P, E/P, B/M</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="merge-data.html"><a href="merge-data.html"><i class="fa fa-check"></i><b>8</b> Merge data</a></li>
+<li class="chapter" data-level="8" data-path="risk-factors.html"><a href="risk-factors.html"><i class="fa fa-check"></i><b>8</b> Risk factors</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="risk-factors.html"><a href="risk-factors.html#file-path-5"><i class="fa fa-check"></i><b>8.1</b> File path</a></li>
+<li class="chapter" data-level="8.2" data-path="risk-factors.html"><a href="risk-factors.html#factor-returns"><i class="fa fa-check"></i><b>8.2</b> Factor returns</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="risk-factors.html"><a href="risk-factors.html#ff3"><i class="fa fa-check"></i><b>8.2.1</b> FF3</a></li>
+<li class="chapter" data-level="8.2.2" data-path="risk-factors.html"><a href="risk-factors.html#ffc4"><i class="fa fa-check"></i><b>8.2.2</b> FFC4</a></li>
+<li class="chapter" data-level="8.2.3" data-path="risk-factors.html"><a href="risk-factors.html#lsy4"><i class="fa fa-check"></i><b>8.2.3</b> LSY4</a></li>
+<li class="chapter" data-level="8.2.4" data-path="risk-factors.html"><a href="risk-factors.html#ff5"><i class="fa fa-check"></i><b>8.2.4</b> FF5</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="merge-data.html"><a href="merge-data.html"><i class="fa fa-check"></i><b>9</b> Merge data</a></li>
 <li class="divider"></li>
 <li><a href="https://www.zhongweiyao.com" target="blank">Copyright 2023 Zhongwei Yao.</a></li>
 
@@ -205,17 +216,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="monthly-cpi-month-to-month" class="section level2 hasAnchor" number="4.2">
 <h2><span class="header-section-number">4.2</span> Monthly CPI month-to-month<a href="inflation.html#monthly-cpi-month-to-month" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Datasgn [数据标识] - PYM＝上年同月为基期, PYP＝上年同期为基期.
-Areasgn [地区标识] - 1=全国，2=城镇，3=农村
-Epim0101 [居民消费价格指数] -
-Epim0102 [居民消费价格指数-食品] -
-Epim0103 [居民消费价格指数-烟酒及用品] -
-Epim0104 [居民消费价格指数-衣着] -
-Epim0105 [居民消费价格指数-家庭设备用品及服务] -
-Epim0106 [居民消费价格指数-医疗保健及个人用品] -
-Epim0107 [居民消费价格指数-交通和通信] -
-Epim0108 [居民消费价格指数-娱乐教育文化用品及服务] -
-Epim0109 [居民消费价格指数-居住] -</p>
+<ul>
+<li><p>Datasgn [数据标识] - PYM＝上年同月为基期, PYP＝上年同期为基期.</p></li>
+<li><p>Areasgn [地区标识] - 1=全国，2=城镇，3=农村</p></li>
+<li><p>Epim0101 [居民消费价格指数] -</p></li>
+<li><p>Epim0102 [居民消费价格指数-食品] -</p></li>
+<li><p>Epim0103 [居民消费价格指数-烟酒及用品] -</p></li>
+<li><p>Epim0104 [居民消费价格指数-衣着] -</p></li>
+<li><p>Epim0105 [居民消费价格指数-家庭设备用品及服务] -</p></li>
+<li><p>Epim0106 [居民消费价格指数-医疗保健及个人用品] -</p></li>
+<li><p>Epim0107 [居民消费价格指数-交通和通信] -</p></li>
+<li><p>Epim0108 [居民消费价格指数-娱乐教育文化用品及服务] -</p></li>
+<li><p>Epim0109 [居民消费价格指数-居住] -</p></li>
+</ul>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="inflation.html#cb10-1" aria-hidden="true" tabindex="-1"></a>cpi_m_csmar <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_xlsx</span>(cpi_path) <span class="sc">%&gt;%</span> </span>
 <span id="cb10-2"><a href="inflation.html#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">3</span><span class="sc">:</span><span class="fu">n</span>()) <span class="sc">%&gt;%</span> </span>
 <span id="cb10-3"><a href="inflation.html#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Areasgn <span class="sc">==</span> <span class="dv">1</span>, Datasgn <span class="sc">==</span> <span class="st">&quot;PYM&quot;</span>) <span class="sc">%&gt;%</span> </span>

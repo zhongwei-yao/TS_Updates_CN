@@ -1,0 +1,7 @@
+"0","ff3_m_csmar <- data.table::fread(ff3_m_path) %>% "
+"0","  tibble() %>% "
+"0","  setlowercolnames() %>% "
+"0","  filter(markettypeid == ""P9714"") %>% "
+"0","  select(tradingmonth, rp_ff3 = riskpremium1, smb_ff3 = smb1, hml_ff3 = hml1) %>% "
+"0","  mutate(tradingmonth = ymd(str_c(tradingmonth, ""-01""))) %>% "
+"0","  arrange(tradingmonth)"

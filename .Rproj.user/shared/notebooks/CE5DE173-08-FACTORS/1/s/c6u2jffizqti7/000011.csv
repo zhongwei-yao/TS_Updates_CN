@@ -1,0 +1,9 @@
+"0","#< Write to the local database
+dbWriteTable(conn_macro,
+    ""ff3_m_csmar"",
+    value = ff3_m_csmar,
+    overwrite = TRUE
+  )
+"
+"2","Error: Invalid or closed connection
+"

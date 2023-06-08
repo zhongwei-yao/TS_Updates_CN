@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 8 Merge data | Times series data updates</title>
+  <title>Chapter 9 Merge data | Times series data updates</title>
   <meta name="description" content="时间序列数据定期更新手册" />
   <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 8 Merge data | Times series data updates" />
+  <meta property="og:title" content="Chapter 9 Merge data | Times series data updates" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="时间序列数据定期更新手册" />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 8 Merge data | Times series data updates" />
+  <meta name="twitter:title" content="Chapter 9 Merge data | Times series data updates" />
   
   <meta name="twitter:description" content="时间序列数据定期更新手册" />
   
@@ -30,7 +30,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="market-valuation.html"/>
+<link rel="prev" href="risk-factors.html"/>
 
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -176,7 +176,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="7.1" data-path="market-valuation.html"><a href="market-valuation.html#dp-ep-bm"><i class="fa fa-check"></i><b>7.1</b> D/P, E/P, B/M</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="merge-data.html"><a href="merge-data.html"><i class="fa fa-check"></i><b>8</b> Merge data</a></li>
+<li class="chapter" data-level="8" data-path="risk-factors.html"><a href="risk-factors.html"><i class="fa fa-check"></i><b>8</b> Risk factors</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="risk-factors.html"><a href="risk-factors.html#file-path-5"><i class="fa fa-check"></i><b>8.1</b> File path</a></li>
+<li class="chapter" data-level="8.2" data-path="risk-factors.html"><a href="risk-factors.html#factor-returns"><i class="fa fa-check"></i><b>8.2</b> Factor returns</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="risk-factors.html"><a href="risk-factors.html#ff3"><i class="fa fa-check"></i><b>8.2.1</b> FF3</a></li>
+<li class="chapter" data-level="8.2.2" data-path="risk-factors.html"><a href="risk-factors.html#ffc4"><i class="fa fa-check"></i><b>8.2.2</b> FFC4</a></li>
+<li class="chapter" data-level="8.2.3" data-path="risk-factors.html"><a href="risk-factors.html#lsy4"><i class="fa fa-check"></i><b>8.2.3</b> LSY4</a></li>
+<li class="chapter" data-level="8.2.4" data-path="risk-factors.html"><a href="risk-factors.html#ff5"><i class="fa fa-check"></i><b>8.2.4</b> FF5</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="merge-data.html"><a href="merge-data.html"><i class="fa fa-check"></i><b>9</b> Merge data</a></li>
 <li class="divider"></li>
 <li><a href="https://www.zhongweiyao.com" target="blank">Copyright 2023 Zhongwei Yao.</a></li>
 
@@ -197,18 +208,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="merge-data" class="section level1 hasAnchor" number="8">
-<h1><span class="header-section-number">Chapter 8</span> Merge data<a href="merge-data.html#merge-data" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="merge-data.html#cb20-1" aria-hidden="true" tabindex="-1"></a>econ_var_m <span class="ot">&lt;-</span> marketret_m_csmar <span class="sc">%&gt;%</span> </span>
-<span id="cb20-2"><a href="merge-data.html#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(market_svar_m_csmar) <span class="sc">%&gt;%</span> </span>
-<span id="cb20-3"><a href="merge-data.html#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(market_turnover_m_csmar) <span class="sc">%&gt;%</span> </span>
-<span id="cb20-4"><a href="merge-data.html#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(cpi_m_csmar) <span class="sc">%&gt;%</span> </span>
-<span id="cb20-5"><a href="merge-data.html#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(ntis_m_csmar) <span class="sc">%&gt;%</span> </span>
-<span id="cb20-6"><a href="merge-data.html#cb20-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(sty_3m_m_cb) <span class="sc">%&gt;%</span> </span>
-<span id="cb20-7"><a href="merge-data.html#cb20-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(lty_10yr_m_cb) <span class="sc">%&gt;%</span> </span>
-<span id="cb20-8"><a href="merge-data.html#cb20-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(termspread_m_cb) <span class="sc">%&gt;%</span> </span>
-<span id="cb20-9"><a href="merge-data.html#cb20-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(market_valuation_m_wind) <span class="sc">%&gt;%</span> </span>
-<span id="cb20-10"><a href="merge-data.html#cb20-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.table</span>()</span></code></pre></div>
+<div id="merge-data" class="section level1 hasAnchor" number="9">
+<h1><span class="header-section-number">Chapter 9</span> Merge data<a href="merge-data.html#merge-data" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="merge-data.html#cb26-1" aria-hidden="true" tabindex="-1"></a>econ_var_m <span class="ot">&lt;-</span> marketret_m_csmar <span class="sc">%&gt;%</span> </span>
+<span id="cb26-2"><a href="merge-data.html#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(market_svar_m_csmar) <span class="sc">%&gt;%</span> </span>
+<span id="cb26-3"><a href="merge-data.html#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(market_turnover_m_csmar) <span class="sc">%&gt;%</span> </span>
+<span id="cb26-4"><a href="merge-data.html#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(cpi_m_csmar) <span class="sc">%&gt;%</span> </span>
+<span id="cb26-5"><a href="merge-data.html#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(ntis_m_csmar) <span class="sc">%&gt;%</span> </span>
+<span id="cb26-6"><a href="merge-data.html#cb26-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(sty_3m_m_cb) <span class="sc">%&gt;%</span> </span>
+<span id="cb26-7"><a href="merge-data.html#cb26-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(lty_10yr_m_cb) <span class="sc">%&gt;%</span> </span>
+<span id="cb26-8"><a href="merge-data.html#cb26-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(termspread_m_cb) <span class="sc">%&gt;%</span> </span>
+<span id="cb26-9"><a href="merge-data.html#cb26-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(market_valuation_m_wind) <span class="sc">%&gt;%</span> </span>
+<span id="cb26-10"><a href="merge-data.html#cb26-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.table</span>()</span></code></pre></div>
 
 </div>
             </section>
@@ -216,7 +227,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="market-valuation.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="risk-factors.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
     </div>
   </div>

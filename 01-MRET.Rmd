@@ -8,7 +8,7 @@ market_pfmc_m_path <- "/Volumes/Samsung_T7/Research/Database/CSMAR/股票市场�
 
 ## Monthly returns
 
-```{r}
+```{r mret_ds}
 mkt_pfmc_m <- readxl::read_excel(market_pfmc_m_path) %>% 
   setlowercolnames() %>% 
   #< 117: 沪深京A股和创业板和科创板; 53: 沪深A股和创业板和科创板
