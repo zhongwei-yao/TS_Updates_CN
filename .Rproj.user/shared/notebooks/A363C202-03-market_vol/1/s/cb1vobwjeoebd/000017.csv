@@ -1,0 +1,6 @@
+"0","ps_month_file %>% 
+  left_join(amihud_month_file) %>% 
+  as.data.table() %>% 
+  fwrite(""/Volumes/Samsung_T7/Research/点子王/基金经理预测分歧与业绩流量敏感性/data/tsvar/market_illiquidity_m_sy.csv"", bom = T)
+"
+"2","Joining with `by = join_by(sy)`"

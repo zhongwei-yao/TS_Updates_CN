@@ -1,0 +1,183 @@
+"0","# source(""common.R"")"
+"0","knitr::opts_chunk$set("
+"0","               # echo = FALSE,"
+"0","	             highlight=TRUE,"
+"0","               message=FALSE,"
+"0","	             eval=FALSE,"
+"0","	             comment=NA,"
+"0","               warning=FALSE)"
+"0","knitr::opts_chunk$set(echo = TRUE)"
+"0","options(digits=5)"
+"0","h <- taskCallbackManager()"
+"0","h$add(function(expr, value, ok, visible) { "
+"0","     options(""prompt""=format(Sys.time(), ""%H:%M:%S> "")); "
+"0","             return(TRUE) }, "
+"0","     name = ""simpleHandler"")"
+"1","[1]"
+"1"," ""simpleHandler"""
+"1","
+"
+"0","library(data.table)"
+"2","data.table 1.14.9 IN DEVELOPMENT built 2023-02-17 18:32:02 UTC; root using 4 threads (see ?getDTthreads).  "
+"2","Latest news: r-datatable.com
+"
+"2","**********
+This development version of data.table was built more than 4 weeks ago. Please update: data.table::update_dev_pkg()
+**********
+"
+"0","library(lubridate)"
+"2","
+Attaching package: ‘lubridate’
+
+"
+"2","The following objects are masked from ‘package:data.table’:
+
+    hour, isoweek, mday, minute, month, quarter, second, wday, week, yday, year
+
+"
+"2","The following objects are masked from ‘package:base’:
+
+    date, intersect, setdiff, union
+
+"
+"0","library(stringr)"
+"0","library(ggplot2)"
+"0","library(dplyr)"
+"2","
+Attaching package: ‘dplyr’
+
+"
+"2","The following objects are masked from ‘package:data.table’:
+
+    between, first, last
+
+"
+"2","The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+"
+"2","The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+"
+"0","library(zoo)"
+"2","
+Attaching package: ‘zoo’
+
+"
+"2","The following objects are masked from ‘package:data.table’:
+
+    yearmon, yearqtr
+
+"
+"2","The following objects are masked from ‘package:base’:
+
+    as.Date, as.Date.numeric
+
+"
+"0","library(purrr)"
+"2","
+Attaching package: ‘purrr’
+
+"
+"2","The following object is masked from ‘package:data.table’:
+
+    transpose
+
+"
+"0","library(slider)"
+"0","library(rugarch)"
+"2","Loading required package: parallel
+"
+"2","
+Attaching package: ‘rugarch’
+
+"
+"2","The following object is masked from ‘package:purrr’:
+
+    reduce
+
+"
+"2","The following object is masked from ‘package:stats’:
+
+    sigma
+
+"
+"0","library(tidyr)"
+"0","library(RSQLite)"
+"0","library(DescTools)"
+"2","
+Attaching package: ‘DescTools’
+
+"
+"2","The following object is masked from ‘package:data.table’:
+
+    %like%
+
+"
+"0","library(fixest)"
+"0","library(dbplyr)"
+"2","Registered S3 methods overwritten by 'dbplyr':
+  method         from
+  print.tbl_lazy     
+  print.tbl_sql      
+"
+"2","
+Attaching package: ‘dbplyr’
+
+"
+"2","The following objects are masked from ‘package:dplyr’:
+
+    ident, sql
+
+"
+"0","library(patchwork)"
+"0","data.table::setDTthreads(6)"
+"0","source(""/Volumes/Samsung_T7/Research/Replications/Rcode/pre_prcs.R"")"
+"0","source(""/Volumes/Samsung_T7/Research/Replications/Rcode/TidyEAP.R"")"
+"0","source(""/Volumes/Samsung_T7/Research/Replications/Rcode/EAPUtills.R"")"
+"0","myfree<-theme_set(theme_bw())"
+"0","old_theme <- theme_update("
+"0","  plot.title=element_text(family=""Arial"", size=26, face=""bold"", colour=""black""),"
+"0","  axis.title.x=element_text(family=""sans"", size=26,face=""bold"", colour=""black""),"
+"0","  axis.title.y=element_text(family=""sans"", size=26, face=""bold"",angle=90, colour=""black""),"
+"0","  axis.text.x=element_text(family=""serif"", size=24, colour=""black"", face=""bold""),"
+"0","  axis.text.y=element_text(family=""serif"", size=24, colour=""black"", face=""bold""),"
+"0","  text=element_text(family=""serif"", size=20, colour=""black""),"
+"0","  axis.ticks=element_line(colour=""black""),"
+"0","  panel.grid.major=element_blank(),"
+"0","  panel.grid.minor=element_blank(),"
+"0","  panel.background=element_blank(),"
+"0","  panel.border=element_blank(),"
+"0","  axis.line=element_line(size=1),"
+"0","  # legend.text=element_text(family=""serif"", size=14, face=""bold"", colour=""black""),"
+"0","  # legend.title=element_text(family=""serif"", size=14, face=""bold"", colour=""black""),"
+"0","  legend.title = element_blank()"
+"0",")"
+"0",""
+"0","conn_stock <- dbConnect("
+"0","  SQLite(),"
+"0","  dbname = ""/Volumes/Samsung_T7/Research/Database/data/stock.sqlite"","
+"0","  extended_types = TRUE"
+"0",")"
+"0","# dbDisconnect(conn_stock)"
+"0","# unlink(""/Volumes/Samsung_T7/Research/Database/data/stock.sqlite"")"
+"0",""
+"0","# conn_macro <- dbConnect("
+"0","#   SQLite(),"
+"0","#   dbname = ""/Volumes/Samsung_T7/Research/Database/data/macrots.sqlite"","
+"0","#   extended_types = TRUE"
+"0","# )"
+"0","# dbDisconnect(conn_macro)"
+"0","# unlink(""/Volumes/Samsung_T7/Research/Database/data/macrots.sqlite"")"
+"0","# "
+"0","# conn_mf <- dbConnect("
+"0","#   SQLite(),"
+"0","#   dbname = ""/Volumes/Samsung_T7/Research/Database/data/mutualfund.sqlite"","
+"0","#   extended_types = TRUE"
+"0","# )"
+"0","# dbDisconnect(conn_mf)"
+"0","# unlink(""/Volumes/Samsung_T7/Research/Database/data/mutualfund.sqlite"")"
+"0",""

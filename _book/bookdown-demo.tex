@@ -1,0 +1,311 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+  \setmonofont[Scale=0.7]{Source Code Pro}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+\usepackage{booktabs}
+\usepackage{xeCJK}
+\setCJKmainfont[BoldFont=Kaiti SC Bold]{Kaiti SC}
+\setmainfont{Times New Roman}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage[]{natbib}
+\bibliographystyle{apalike}
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={Stock Data Update},
+  pdfauthor={Zhongwei Yao},
+  colorlinks=true,
+  linkcolor={Maroon},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={Blue},
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Stock Data Update}
+\author{Zhongwei Yao}
+\date{2023-06-08}
+
+\begin{document}
+\maketitle
+
+{
+\hypersetup{linkcolor=}
+\setcounter{tocdepth}{2}
+\tableofcontents
+}
+\listoffigures
+\listoftables
+\hypertarget{stock-market-returns}{%
+\section{Stock market returns}\label{stock-market-returns}}
+
+Placeholder
+
+\hypertarget{file-path}{%
+\subsection{File path}\label{file-path}}
+
+\hypertarget{monthly-returns}{%
+\subsection{Monthly returns}\label{monthly-returns}}
+
+\hypertarget{cumulative-mret-backward}{%
+\subsubsection{Cumulative MRET: Backward}\label{cumulative-mret-backward}}
+
+\hypertarget{cumulative-mret-forward}{%
+\subsubsection{Cumulative MRET: Forward}\label{cumulative-mret-forward}}
+
+\hypertarget{market-volatility}{%
+\section{Market volatility}\label{market-volatility}}
+
+\hypertarget{file-path-1}{%
+\subsection{File path}\label{file-path-1}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{market\_pfmc\_d\_path }\OtherTok{\textless{}{-}} \StringTok{"/Volumes/Samsung\_T7/Research/Database/CSMAR/股票市场系列/股票市场交易/综合市场交易数据/TRD\_Cndalym1990{-}12{-}19 至 2023{-}04{-}20.csv"}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{stock-market-variance}{%
+\subsection{Stock market variance}\label{stock-market-variance}}
+
+股票方差是过去252个交易日A股市场加权市场投资组合日收益率平方
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{market\_svar\_m\_csmar }\OtherTok{\textless{}{-}}\NormalTok{ data.table}\SpecialCharTok{::}\FunctionTok{fread}\NormalTok{(market\_pfmc\_d\_path) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{tibble}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{setlowercolnames}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{filter}\NormalTok{(markettype }\SpecialCharTok{==} \DecValTok{117}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{select}\NormalTok{(}\AttributeTok{tradingdate =}\NormalTok{ trddt, cdretwdos) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{tradingdate =} \FunctionTok{ymd}\NormalTok{(tradingdate), }\AttributeTok{svar =}\NormalTok{ cdretwdos }\SpecialCharTok{*}\NormalTok{ cdretwdos) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{na.omit}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{arrange}\NormalTok{(tradingdate) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{svar =} \FunctionTok{rollsumr}\NormalTok{(svar, }\DecValTok{252}\NormalTok{, }\AttributeTok{fill =} \ConstantTok{NA}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{group\_by}\NormalTok{(}\FunctionTok{year}\NormalTok{(tradingdate), }\FunctionTok{month}\NormalTok{(tradingdate)) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{tradingdate =} \FunctionTok{last}\NormalTok{(tradingdate), }\AttributeTok{svar =} \FunctionTok{last}\NormalTok{(svar)) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{ungroup}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{na.omit}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{tradingmonth =} \FunctionTok{ceiling\_date}\NormalTok{(tradingdate, }\StringTok{"m"}\NormalTok{) }\SpecialCharTok{{-}} \FunctionTok{days}\NormalTok{(}\DecValTok{1}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{select}\NormalTok{(tradingmonth, svar)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{market-turnover}{%
+\section{Market turnover}\label{market-turnover}}
+
+\hypertarget{file-path-2}{%
+\subsection{File path}\label{file-path-2}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{stock\_ret\_month\_path }\OtherTok{\textless{}{-}} \StringTok{"/Volumes/Samsung\_T7/Research/Database/CSMAR/股票市场系列/股票市场交易/个股回报率/月个股回报率/TRD\_Mnth1990{-}12 至 2023{-}03.txt"}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{monthly-trading-volume-all-a-shares}{%
+\subsection{Monthly trading volume: All A shares}\label{monthly-trading-volume-all-a-shares}}
+
+Bottom-up average with all a shares
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{market\_turnover\_m\_csmar }\OtherTok{\textless{}{-}} \FunctionTok{fread}\NormalTok{(stock\_ret\_month\_path, }\AttributeTok{colClasses =} \FunctionTok{c}\NormalTok{(}\AttributeTok{Stkcd =} \StringTok{"character"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{setlowercolnames}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  .[markettype }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{16}\NormalTok{, }\DecValTok{32}\NormalTok{)] }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  .[, tradingmonth }\SpecialCharTok{:}\ErrorTok{=} \FunctionTok{ymd}\NormalTok{(}\FunctionTok{paste0}\NormalTok{(trdmnt, }\StringTok{"{-}01"}\NormalTok{))] }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  .[, .(stkcd, tradingmonth, mclsprc, mnshrtrd, mnvaltrd, msmvosd)] }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  .[, mnshrfloata }\SpecialCharTok{:}\ErrorTok{=}\NormalTok{ msmvosd }\SpecialCharTok{*} \DecValTok{1000} \SpecialCharTok{/}\NormalTok{ mclsprc] }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  .[, }\StringTok{\textasciigrave{}}\AttributeTok{:=}\StringTok{\textasciigrave{}}\NormalTok{(}\AttributeTok{turnover\_1 =}\NormalTok{ mnshrtrd }\SpecialCharTok{/}\NormalTok{ mnshrfloata, }\AttributeTok{turnover\_2 =}\NormalTok{ mnvaltrd }\SpecialCharTok{/}\NormalTok{ (msmvosd }\SpecialCharTok{*} \DecValTok{1000}\NormalTok{))] }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{na.omit}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  .[, }\FunctionTok{lapply}\NormalTok{(.SD, }\ControlFlowTok{function}\NormalTok{(x) }\FunctionTok{weighted.mean}\NormalTok{(x,}\AttributeTok{w =}\NormalTok{ msmvosd)), .SDcols }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\StringTok{"turnover\_1"}\NormalTok{, }\StringTok{"turnover\_2"}\NormalTok{), tradingmonth] }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{setorder}\NormalTok{(tradingmonth) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  .[, (}\FunctionTok{c}\NormalTok{(}\StringTok{"turnover\_12m\_mean\_backward\_1"}\NormalTok{, }\StringTok{"turnover\_12m\_backward\_2"}\NormalTok{)) }\SpecialCharTok{:}\ErrorTok{=} \FunctionTok{lapply}\NormalTok{(.SD, RcppRoll}\SpecialCharTok{::}\NormalTok{roll\_meanr, }\AttributeTok{n =} \DecValTok{12}\NormalTok{), .SDcols }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\StringTok{"turnover\_1"}\NormalTok{, }\StringTok{"turnover\_2"}\NormalTok{)] }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  .[, (}\FunctionTok{c}\NormalTok{(}\StringTok{"turnover\_12m\_mean\_forward\_1"}\NormalTok{, }\StringTok{"turnover\_12m\_mean\_forward\_2"}\NormalTok{)) }\SpecialCharTok{:}\ErrorTok{=} \FunctionTok{lapply}\NormalTok{(.SD, RcppRoll}\SpecialCharTok{::}\NormalTok{roll\_meanl, }\AttributeTok{n =} \DecValTok{12}\NormalTok{), .SDcols }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\StringTok{"turnover\_1"}\NormalTok{, }\StringTok{"turnover\_2"}\NormalTok{)] }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  .[, tradingmonth }\SpecialCharTok{:}\ErrorTok{=} \FunctionTok{ceiling\_date}\NormalTok{(tradingmonth, }\StringTok{"m"}\NormalTok{) }\SpecialCharTok{{-}}\FunctionTok{days}\NormalTok{(}\DecValTok{1}\NormalTok{)] }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  .[]}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{inflation}{%
+\section{Inflation}\label{inflation}}
+
+Placeholder
+
+\hypertarget{file-path-3}{%
+\subsection{File path}\label{file-path-3}}
+
+\hypertarget{monthly-cpi-month-to-month}{%
+\subsection{Monthly CPI month-to-month}\label{monthly-cpi-month-to-month}}
+
+\hypertarget{net-equity-expansion}{%
+\section{Net equity expansion}\label{net-equity-expansion}}
+
+Placeholder
+
+\hypertarget{file-path-4}{%
+\subsection{File path}\label{file-path-4}}
+
+\hypertarget{ntis}{%
+\subsection{NTIS}\label{ntis}}
+
+\hypertarget{government-bond-yields}{%
+\section{Government bond yields}\label{government-bond-yields}}
+
+Placeholder
+
+\hypertarget{ux4e2dux503aux5230ux671fux6536ux76caux7387ux66f2ux7ebf}{%
+\subsection{中债到期收益率曲线}\label{ux4e2dux503aux5230ux671fux6536ux76caux7387ux66f2ux7ebf}}
+
+\hypertarget{short-term-yield-3m}{%
+\subsection{Short-term yield: 3m}\label{short-term-yield-3m}}
+
+\hypertarget{long-term-yield-10yr}{%
+\subsection{Long-term yield: 10Yr}\label{long-term-yield-10yr}}
+
+\hypertarget{termspread}{%
+\subsection{Termspread}\label{termspread}}
+
+\hypertarget{market-valuation}{%
+\section{Market valuation}\label{market-valuation}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mv\_path }\OtherTok{\textless{}{-}} \StringTok{"/Volumes/Samsung\_T7/Research/Database/WIND/指数/指数行情序列/STK\_INDEX\_VALUATION\_update202302.xlsx"}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{dp-ep-bm}{%
+\subsection{D/P, E/P, B/M}\label{dp-ep-bm}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{market\_valuation\_m\_wind }\OtherTok{\textless{}{-}}\NormalTok{ readxl}\SpecialCharTok{::}\FunctionTok{read\_xlsx}\NormalTok{(mv\_path, }\StringTok{"WINDA"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+      \FunctionTok{mutate}\NormalTok{(}\AttributeTok{tradingmonth =} \FunctionTok{ymd}\NormalTok{(}\FunctionTok{ceiling\_date}\NormalTok{(ymd, }\StringTok{"month"}\NormalTok{) }\SpecialCharTok{{-}} \FunctionTok{days}\NormalTok{(}\DecValTok{1}\NormalTok{)), }\AttributeTok{ep\_winda =} \DecValTok{1} \SpecialCharTok{/}\NormalTok{ pe, }\AttributeTok{bp\_winda =} \DecValTok{1} \SpecialCharTok{/}\NormalTok{ pb, }\AttributeTok{dp\_winda =}\NormalTok{ dp) }\SpecialCharTok{\%\textgreater{}\%} 
+      \FunctionTok{select}\NormalTok{(tradingmonth, ep\_winda, bp\_winda, dp\_winda, }\AttributeTok{pe\_winda =}\NormalTok{ pe, }\AttributeTok{pb\_winda =}\NormalTok{ pb) }
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{merge-data}{%
+\section{Merge data}\label{merge-data}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{econ\_var\_m }\OtherTok{\textless{}{-}}\NormalTok{ marketret\_m\_csmar }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{left\_join}\NormalTok{(market\_svar\_m\_csmar) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{left\_join}\NormalTok{(market\_turnover\_m\_csmar) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{left\_join}\NormalTok{(cpi\_m\_csmar) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{left\_join}\NormalTok{(ntis\_m\_csmar) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{left\_join}\NormalTok{(sty\_3m\_m\_cb) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{left\_join}\NormalTok{(lty\_10yr\_m\_cb) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{left\_join}\NormalTok{(termspread\_m\_cb) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{left\_join}\NormalTok{(market\_valuation\_m\_wind) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{as.data.table}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+
+  \bibliography{book.bib,packages.bib}
+
+\end{document}

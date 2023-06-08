@@ -1,0 +1,14 @@
+"0","stock_mf_turnover_m <- a_shares_mktcap_m %>% 
+  mutate(sy = as.yearsy(tradingmonth)) %>% 
+  inner_join(mf_hold_to_mkt_sy[shares_to_float_mf >= 5, .(stkcd, sy, shares_to_float_mf = shares_to_float_mf / 100)]) %>% 
+  as.data.table() %>% 
+  # .[, msmvosd_mf := msmvosd * shares_to_float_mf] %>% 
+  .[, lapply(.SD, function(x) weighted.mean(x ,w = msmvosd, na.rm = T)), .SDcols = c(""turnover_1"", ""turnover_2""), .(tradingmonth)] %>% 
+  setorder(tradingmonth) %>% 
+  .[, (c(""turnover_mkt_mf_m_1"", ""turnover_mkt_mf_m_2"")) := lapply(.SD, RcppRoll::roll_meanr, n = 12), .SDcols = c(""turnover_1"", ""turnover_2"")] %>% 
+  .[, sy := as.yearsy(tradingmonth)] %>% 
+  .[month(tradingmonth) %in% c(3, 8)] %>% 
+  .[, `:=`(sy = sy - 0.5, tradingmonth = NULL)] %>%
+  .[]
+"
+"2","Joining with `by = join_by(stkcd, sy)`"

@@ -1,0 +1,110 @@
+--- 
+title: "Times series data updates"
+author: "Zhongwei Yao"
+date: "`r Sys.Date()`"
+output:
+  bookdown::pdf_book: 
+    latex_engine: xelatex
+  bookdown::pdf_document2: 
+    latex_engine: xelatex
+  rmdformats::robobook: 
+    number_sections: TRUE 
+    use_bookdown: TRUE
+description: 时间序列数据定期更新手册
+documentclass: article
+monofont: Source Code Pro
+monofontoptions: Scale=0.7
+bibliography:
+- book.bib
+- packages.bib
+site: bookdown::bookdown_site
+biblio-style: apalike
+link-citations: yes
+colorlinks: yes
+graphics: yes
+lot: yes
+lof: yes
+---
+
+```{r setup, include=FALSE,warning=FALSE}
+# source("common.R")
+knitr::opts_chunk$set(
+               # echo = FALSE,
+	             highlight=TRUE,
+               message=FALSE,
+	             eval=FALSE,
+	             comment=NA,
+               warning=FALSE)
+knitr::opts_chunk$set(echo = TRUE)
+options(digits=5)
+h <- taskCallbackManager()
+h$add(function(expr, value, ok, visible) { 
+     options("prompt"=format(Sys.time(), "%H:%M:%S> ")); 
+             return(TRUE) }, 
+     name = "simpleHandler")
+
+library(data.table)
+library(lubridate)
+library(stringr)
+library(ggplot2)
+library(dplyr)
+library(zoo)
+library(purrr)
+library(slider)
+library(rugarch)
+library(tidyr)
+library(RSQLite)
+library(DescTools)
+library(fixest)
+library(dbplyr)
+library(RcppRoll)
+library(patchwork)
+data.table::setDTthreads(6)
+source("/Volumes/Samsung_T7/Research/Replications/Rcode/pre_prcs.R")
+source("/Volumes/Samsung_T7/Research/Replications/Rcode/TidyEAP.R")
+source("/Volumes/Samsung_T7/Research/Replications/Rcode/EAPUtills.R")
+myfree<-theme_set(theme_bw())
+old_theme <- theme_update(
+  plot.title=element_text(family="Arial", size=26, face="bold", colour="black"),
+  axis.title.x=element_text(family="sans", size=26,face="bold", colour="black"),
+  axis.title.y=element_text(family="sans", size=26, face="bold",angle=90, colour="black"),
+  axis.text.x=element_text(family="serif", size=24, colour="black", face="bold"),
+  axis.text.y=element_text(family="serif", size=24, colour="black", face="bold"),
+  text=element_text(family="serif", size=20, colour="black"),
+  axis.ticks=element_line(colour="black"),
+  panel.grid.major=element_blank(),
+  panel.grid.minor=element_blank(),
+  panel.background=element_blank(),
+  panel.border=element_blank(),
+  axis.line=element_line(size=1),
+  # legend.text=element_text(family="serif", size=14, face="bold", colour="black"),
+  # legend.title=element_text(family="serif", size=14, face="bold", colour="black"),
+  legend.title = element_blank()
+)
+
+conn_stock <- dbConnect(
+  SQLite(),
+  dbname = "/Volumes/Samsung_T7/Research/Database/data/stock.sqlite",
+  extended_types = TRUE
+)
+
+# dbDisconnect(conn_stock)
+# unlink("/Volumes/Samsung_T7/Research/Database/data/stock.sqlite")
+
+# conn_macro <- dbConnect(
+#   SQLite(),
+#   dbname = "/Volumes/Samsung_T7/Research/Database/data/macrots.sqlite",
+#   extended_types = TRUE
+# )
+# dbDisconnect(conn_macro)
+# unlink("/Volumes/Samsung_T7/Research/Database/data/macrots.sqlite")
+# 
+# conn_mf <- dbConnect(
+#   SQLite(),
+#   dbname = "/Volumes/Samsung_T7/Research/Database/data/mutualfund.sqlite",
+#   extended_types = TRUE
+# )
+# dbDisconnect(conn_mf)
+# unlink("/Volumes/Samsung_T7/Research/Database/data/mutualfund.sqlite")
+
+```

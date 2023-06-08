@@ -1,0 +1,49 @@
+# Government bond yields
+
+中债到期收益率曲线
+
+```{r gb_path}
+gb_path <- "/Volumes/Samsung_T7/Research/Database/中债/中债国债到期收益率标准期限信息/"
+```
+
+## 中债到期收益率曲线
+
+```{r gby}
+gb_ts <- paste0(gb_path, dir(gb_path, ".xlsx")) %>% 
+  map_dfr(
+    ~readxl::read_xlsx(.x) %>% 
+      select(yield = `收益率(%)`, tenure = `标准期限说明`, tradingdate = `日期`) %>% 
+      mutate(yield = as.double(yield), tradingdate = ymd(tradingdate), tradingmonth = ceiling_date(tradingdate, "m") - days(1))
+  ) %>% 
+  group_by(tradingmonth, tenure) %>% 
+  summarise_all(last) %>% 
+  ungroup() %>% 
+  select(-tradingdate)
+```
+
+## Short-term yield: 3m
+
+```{r sty}
+sty_3m_m_cb <- gb_ts %>% 
+  filter(tenure == "3m") %>% 
+  select(-tenure) %>% 
+  rename(sty = yield)
+```
+
+## Long-term yield: 10Yr
+
+```{r lty}
+lty_10yr_m_cb <- gb_ts %>% 
+  filter(tenure == "10y") %>% 
+  select(-tenure) %>% 
+  rename(lty = yield)
+```
+
+## Termspread
+
+```{r tms}
+termspread_m_cb <- lty_10yr %>% 
+  left_join(sty_3m) %>% 
+  mutate(termspread = lty - sty) %>% 
+  select(tradingmonth, termspread)
+```

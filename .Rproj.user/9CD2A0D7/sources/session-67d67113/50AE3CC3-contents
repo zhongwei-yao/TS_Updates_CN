@@ -1,0 +1,37 @@
+# Inflation
+
+## File path
+
+```{r minflation_path}
+cpi_path <- "/Volumes/Samsung_T7/Research/Database/CSMAR/经济研究系列/宏观经济/价格指数/居民消费价格分类指数月度文件/CME_Mpi12003-02 至 2023-02.xlsx"
+```
+
+## Monthly CPI month-to-month
+
+Datasgn [数据标识] - PYM＝上年同月为基期, PYP＝上年同期为基期.
+Areasgn [地区标识] - 1=全国，2=城镇，3=农村
+Epim0101 [居民消费价格指数] - 
+Epim0102 [居民消费价格指数-食品] - 
+Epim0103 [居民消费价格指数-烟酒及用品] - 
+Epim0104 [居民消费价格指数-衣着] - 
+Epim0105 [居民消费价格指数-家庭设备用品及服务] - 
+Epim0106 [居民消费价格指数-医疗保健及个人用品] - 
+Epim0107 [居民消费价格指数-交通和通信] - 
+Epim0108 [居民消费价格指数-娱乐教育文化用品及服务] - 
+Epim0109 [居民消费价格指数-居住] - 
+
+```{r mcpi_mtm}
+cpi_m_csmar <- readxl::read_xlsx(cpi_path) %>% 
+  slice(3:n()) %>% 
+  filter(Areasgn == 1, Datasgn == "PYM") %>% 
+  mutate(tradingmonth = ceiling_date(ymd(paste0(Staper, "-01")), "m") - days(1), 
+         year = year(tradingmonth),
+         cpi = as.double(Epim0101)) %>% 
+  # filter(month(tradingmonth) == 12, !is.na(cpi), year >= 2000) %>% 
+  select(tradingmonth, cpi) %>% 
+  mutate(inflation = cpi - 100) %>% 
+  #< Because inflation information is released only in the following month, we wait for one month before using it in our monthly regression.
+  mutate(inflation = dplyr::lag(inflation, 1)) %>%
+  na.omit() %>% 
+  select(-cpi)
+```

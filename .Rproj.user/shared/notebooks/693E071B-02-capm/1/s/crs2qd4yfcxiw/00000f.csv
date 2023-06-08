@@ -1,0 +1,4 @@
+"0","ret_week_ds <- ret_freq_fun(freq = ""week"")"
+"2","Error in get(paste0(""stock_ret_"", freq, ""_ds"")) : 
+  object 'stock_ret_week_ds' not found
+"

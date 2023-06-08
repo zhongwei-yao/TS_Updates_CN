@@ -1,0 +1,2 @@
+"0",""
+"0","analyst_forecasts_a[, fnetpro_new := fifelse(is.na(fnetpro), feps * a_shares_out, fnetpro)][]"

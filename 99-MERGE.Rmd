@@ -1,0 +1,15 @@
+# Merge data
+
+```{r merge_ts}
+econ_var_m <- marketret_m_csmar %>% 
+  left_join(market_svar_m_csmar) %>% 
+  left_join(market_turnover_m_csmar) %>% 
+  left_join(cpi_m_csmar) %>% 
+  left_join(ntis_m_csmar) %>% 
+  left_join(sty_3m_m_cb) %>% 
+  left_join(lty_10yr_m_cb) %>% 
+  left_join(termspread_m_cb) %>% 
+  left_join(market_valuation_m_wind) %>% 
+  as.data.table()
+  
+```

@@ -1,0 +1,54 @@
+# Stock market returns
+
+## File path
+
+```{r mret_path}
+market_pfmc_m_path <- "/Volumes/Samsung_T7/Research/Database/CSMAR/股票市场系列/股票市场交易/综合市场交易数据/TRD_Cnmont1990-12 至 2023-03.xlsx"
+```
+
+## Monthly returns
+
+```{r}
+mkt_pfmc_m <- readxl::read_excel(market_pfmc_m_path) %>% 
+  setlowercolnames() %>% 
+  #< 117: 沪深京A股和创业板和科创板; 53: 沪深A股和创业板和科创板
+  filter(markettype == 117) %>% 
+  mutate(tradingmonth = ymd(str_c(trdmnt, "-01"))) %>% 
+  select(tradingmonth, cmretwdos) %>% 
+  mutate(cmretwdos = as.double(cmretwdos)) %>% 
+  na.omit()
+```
+
+
+### Cumulative MRET: Backward
+
+```{r mret_past}
+marketret_m_ds <- mkt_pfmc_m
+for (i in seq(1, 59, 1)){
+  m <- i + 1
+  marketret_m_ds <- bind_cols(
+    marketret_m_ds,
+    tibble(
+      "marketret_m_backward_{{m}}m" := slide_period(mkt_pfmc_m$cmretwdos, mkt_pfmc_m$tradingmonth, .period = "month", .before = i, .complete = T, .f = ~prod(1+.x) - 1)
+    )
+  )
+}
+
+```
+
+### Cumulative MRET: Forward
+
+```{r mret_ahead}
+for (i in seq(1, 60, 1)){
+  marketret_m_ds <- bind_cols(
+    marketret_m_ds,
+    tibble(
+      "marketret_m_forward_{{i}}m" := slide_period(mkt_pfmc_m$cmretwdos, mkt_pfmc_m$tradingmonth, .period = "month", .before = -1, .after = i, .complete = T, .f = ~prod(1+.x) - 1)
+    )
+  )
+}
+
+marketret_m_csmar <- unnest(marketret_m_ds, everything()) %>% 
+  rename(marketret_m_backward_1m = cmretwdos) %>% 
+  mutate(tradingmonth = ceiling_date(tradingmonth, "m") -days(1))
+```

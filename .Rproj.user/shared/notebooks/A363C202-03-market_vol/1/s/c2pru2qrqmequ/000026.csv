@@ -1,0 +1,3 @@
+"0","mkt_garch_roll <-  ugarchroll(mkt_garch_spec, market_ret_month_xts$cdretwdos, n.start = 2000, refit.every = 7, refit.window = ""moving"", solver = ""hybrid"", calculate.VaR = FALSE)
+"
+"2","Warning: possible convergence problem: optim gave code = 1"

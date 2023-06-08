@@ -1,0 +1,23 @@
+"0","stock_turnover <- fread(stock_ret_month_path, colClasses = c(Stkcd = ""character"")) %>% 
+  setlowercolnames() %>% 
+  .[markettype %in% c(1, 4, 16, 32)] %>% 
+  .[, tradingmonth := ymd(paste0(trdmnt, ""-01""))] %>% 
+  .[, .(stkcd, tradingmonth, mclsprc, mnshrtrd, mnvaltrd, msmvosd)] %>% 
+  .[, mnshrfloata := msmvosd * 1000 / mclsprc] %>% 
+  .[, `:=`(turnover_1 = mnshrtrd / mnshrfloata, turnover_2 = mnvaltrd / (msmvosd * 1000))] %>% 
+  na.omit() %>% 
+  .[, lapply(.SD, function(x) weighted.mean(x,w = msmvosd)), .SDcols = c(""turnover_1"", ""turnover_2""), tradingmonth] %>% 
+  setorder(tradingmonth) %>% 
+  .[, (c(""turnover_6m_mean_1"", ""turnover_6m_mean_2"")) := lapply(.SD, RcppRoll::roll_meanr, n = 12), .SDcols = c(""turnover_1"", ""turnover_2"")] %>% 
+  .[, (c(""turnover_6m_mean_forward_1"", ""turnover_6m_mean_forward_2"")) := lapply(.SD, RcppRoll::roll_meanl, n = 12), .SDcols = c(""turnover_1"", ""turnover_2"")] %>% 
+  .[,
+    {
+      yq = as.yearqtr(tradingmonth)
+      sy = fifelse(quarter(yq) %in% c(1, 3), yq + 0.25, yq)
+      data.table(sy, tradingmonth, turnover_1, turnover_2, turnover_mkt_m_1 = turnover_6m_mean_1, turnover_mkt_m_2 = turnover_6m_mean_2, turnover_6m_mean_forward_1, turnover_6m_mean_forward_2)
+    }
+  ]
+"
+"2","Error in fread(stock_ret_month_path, colClasses = c(Stkcd = ""character"")) : 
+  object 'stock_ret_month_path' not found
+"

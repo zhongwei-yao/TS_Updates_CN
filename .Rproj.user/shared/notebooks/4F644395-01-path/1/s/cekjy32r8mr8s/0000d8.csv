@@ -1,0 +1,10 @@
+"0","analyst_forecasts_a <- a_shares_outstanding %>%   
+  .[analyst_forecasts_a, on = .(stkcd, rptdt), roll = TRUE] 
+#< Inverse the Rolling join with the most recent reference date
+analyst_forecasts_a <- a_shares_outstanding %>%   
+  .[analyst_forecasts_a, on = .(stkcd, rptdt), roll = -Inf] 
+
+analyst_forecasts_a[, `:=`(i.a_shares_out = NULL, i.clsprc = NULL)][]
+"
+"0",""
+"0","analyst_forecasts_a[, feps_new := fifelse(is.na(feps), fnetpro / a_shares_out, feps)][]"

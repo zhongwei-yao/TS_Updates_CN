@@ -1,0 +1,33 @@
+# Net equity expansion
+
+## File path
+
+```{r ntis_path}
+ntis_path <- "/Volumes/Samsung_T7/Research/Database/CSMAR/专题研究系列/事件研究/公司事件/IPO事件表/ER_IPO.txt"
+```
+
+## NTIS
+
+过去12个月新股募资金额/当月流通A股市值
+
+```{r ntis}
+ntis_m_csmar <- fread(ntis_path) %>% 
+  .[CurrencyCode == "CNY", .(raisefund = RaiseFund, enddate = fifelse(is.na(EndDate), ListedDate, StartDate))] %>% 
+  .[, tradingmonth := floor_date(enddate, "m")] %>% 
+  .[, .(raisefund = sum(raisefund, na.rm = T)), tradingmonth] %>% 
+  .[data.table(tradingmonth = seq.Date(ymd("2000-1-1"), ymd("2023-1-1"), by = "month")), on = "tradingmonth"] %>% 
+  setorder(tradingmonth) %>% 
+  .[, ntis :=  roll_sumr(raisefund, n = 12, fill = NA, na.rm = T)] %>% 
+  .[, .(tradingmonth, ntis)] %>% 
+  left_join(
+    readxl::read_excel(market_pfmc_m_path) %>% 
+      setlowercolnames() %>% 
+      filter(markettype == 117) %>% 
+      mutate(tradingmonth = ymd(str_c(trdmnt, "-01"))) %>% 
+      select(tradingmonth, cmmvosd) %>% 
+      na.omit()
+  ) %>% 
+  as.data.table() %>% 
+  na.omit() %>% 
+  .[, .(tradingmonth = ceiling_date(tradingmonth, "m") - days(1), ntis = ntis / (cmmvosd * 1000))] 
+```
