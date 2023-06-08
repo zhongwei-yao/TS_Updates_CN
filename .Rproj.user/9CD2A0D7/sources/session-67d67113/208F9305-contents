@@ -51,4 +51,12 @@ for (i in seq(1, 60, 1)){
 marketret_m_csmar <- unnest(marketret_m_ds, everything()) %>% 
   rename(marketret_m_backward_1m = cmretwdos) %>% 
   mutate(tradingmonth = ceiling_date(tradingmonth, "m") -days(1))
+
+#< Write to the local database
+dbWriteTable(conn_macro,
+    "marketret_m_csmar",
+    value = marketret_m_csmar,
+    overwrite = TRUE
+  )
+
 ```

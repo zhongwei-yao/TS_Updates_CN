@@ -133,6 +133,7 @@ Attaching package: ‘dbplyr’
     ident, sql
 
 "
+"0","library(RcppRoll)"
 "0","library(patchwork)"
 "0","data.table::setDTthreads(6)"
 "0","source(""/Volumes/Samsung_T7/Research/Replications/Rcode/pre_prcs.R"")"
@@ -162,7 +163,8 @@ Attaching package: ‘dbplyr’
 "0","  dbname = ""/Volumes/Samsung_T7/Research/Database/data/stock.sqlite"","
 "0","  extended_types = TRUE"
 "0",")"
-"0","# dbDisconnect(conn_stock)"
+"0",""
+"0","dbDisconnect(conn_stock)"
 "0","# unlink(""/Volumes/Samsung_T7/Research/Database/data/stock.sqlite"")"
 "0",""
 "0","# conn_macro <- dbConnect("

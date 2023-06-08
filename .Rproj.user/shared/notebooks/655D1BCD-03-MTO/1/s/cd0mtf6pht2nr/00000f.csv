@@ -1,0 +1,9 @@
+"0","#< Write to the local database
+dbWriteTable(conn_macro,
+    ""market_turnover_m_csmar"",
+    value = market_turnover_m_csmar,
+    overwrite = TRUE
+  )
+"
+"2","Error: Invalid or closed connection
+"

@@ -28,6 +28,7 @@ sty_3m_m_cb <- gb_ts %>%
   filter(tenure == "3m") %>% 
   select(-tenure) %>% 
   rename(sty = yield)
+
 ```
 
 ## Long-term yield: 10Yr
@@ -42,8 +43,19 @@ lty_10yr_m_cb <- gb_ts %>%
 ## Termspread
 
 ```{r tms}
-termspread_m_cb <- lty_10yr %>% 
-  left_join(sty_3m) %>% 
+termspread_m_cb <- lty_10yr_m_cb %>% 
+  left_join(sty_3m_m_cb) %>% 
   mutate(termspread = lty - sty) %>% 
   select(tradingmonth, termspread)
+
+gby_m_cb <- sty_3m_m_cb %>% 
+  left_join(lty_10yr_m_cb) %>% 
+  left_join(termspread_m_cb)
+
+#< Write to the local database
+dbWriteTable(conn_macro,
+    "gby_m_cb",
+    value = gby_m_cb,
+    overwrite = TRUE
+  )
 ```

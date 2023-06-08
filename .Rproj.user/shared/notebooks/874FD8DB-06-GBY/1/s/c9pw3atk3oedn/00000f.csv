@@ -1,0 +1,4 @@
+"0","sty_3m_m_cb <- gb_ts %>% "
+"0","  filter(tenure == ""3m"") %>% "
+"0","  select(-tenure) %>% "
+"0","  rename(sty = yield)"

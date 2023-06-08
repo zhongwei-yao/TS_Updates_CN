@@ -10,4 +10,11 @@ mv_path <- "/Volumes/Samsung_T7/Research/Database/WIND/指数/指数行情序列
 market_valuation_m_wind <- readxl::read_xlsx(mv_path, "WINDA") %>% 
       mutate(tradingmonth = ymd(ceiling_date(ymd, "month") - days(1)), ep_winda = 1 / pe, bp_winda = 1 / pb, dp_winda = dp) %>% 
       select(tradingmonth, ep_winda, bp_winda, dp_winda, pe_winda = pe, pb_winda = pb) 
+
+#< Write to the local database
+dbWriteTable(conn_macro,
+    "market_valuation_m_wind",
+    value = market_valuation_m_wind,
+    overwrite = TRUE
+  )
 ```

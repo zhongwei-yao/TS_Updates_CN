@@ -26,4 +26,12 @@ market_svar_m_csmar <- data.table::fread(market_pfmc_d_path) %>%
   na.omit() %>% 
   mutate(tradingmonth = ceiling_date(tradingdate, "m") - days(1)) %>% 
   select(tradingmonth, svar)
+
+
+#< Write to the local database
+dbWriteTable(conn_macro,
+    "market_svar_m_csmar",
+    value = market_svar_m_csmar,
+    overwrite = TRUE
+  )
 ```

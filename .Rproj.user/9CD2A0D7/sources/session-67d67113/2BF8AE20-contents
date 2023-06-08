@@ -30,4 +30,10 @@ ntis_m_csmar <- fread(ntis_path) %>%
   as.data.table() %>% 
   na.omit() %>% 
   .[, .(tradingmonth = ceiling_date(tradingmonth, "m") - days(1), ntis = ntis / (cmmvosd * 1000))] 
+#< Write to the local database
+dbWriteTable(conn_macro,
+    "ntis_m_csmar",
+    value = ntis_m_csmar,
+    overwrite = TRUE
+  )
 ```

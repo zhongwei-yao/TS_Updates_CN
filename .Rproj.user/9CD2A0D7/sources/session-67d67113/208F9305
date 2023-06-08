@@ -3,7 +3,7 @@
     "path": "/Volumes/Samsung_T7/Research/点子王/update-时序数据更新/RMD/01-MRET.Rmd",
     "project_path": "01-MRET.Rmd",
     "type": "r_markdown",
-    "hash": "459178525",
+    "hash": "0",
     "contents": "",
     "dirty": false,
     "created": 1686198043231.0,
@@ -11,14 +11,17 @@
     "relative_order": 2,
     "properties": {
         "source_window_id": "",
-        "Source": "Source"
+        "Source": "Source",
+        "cursorPosition": "50,17",
+        "scrollLine": "39",
+        "marks": "<:50,0\n>:50,16"
     },
     "folds": "",
-    "lastKnownWriteTime": 1686195950,
+    "lastKnownWriteTime": 1686206218,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1686195950,
+    "last_content_update": 1686206218255,
     "read_only": false,
     "read_only_alternatives": []
 }

@@ -21,8 +21,15 @@ market_turnover_m_csmar <- fread(stock_ret_month_path, colClasses = c(Stkcd = "c
   na.omit() %>% 
   .[, lapply(.SD, function(x) weighted.mean(x,w = msmvosd)), .SDcols = c("turnover_1", "turnover_2"), tradingmonth] %>% 
   setorder(tradingmonth) %>% 
-  .[, (c("turnover_12m_mean_backward_1", "turnover_12m_backward_2")) := lapply(.SD, RcppRoll::roll_meanr, n = 12), .SDcols = c("turnover_1", "turnover_2")] %>% 
+  .[, (c("turnover_12m_mean_backward_1", "turnover_12m_mean_backward_2")) := lapply(.SD, RcppRoll::roll_meanr, n = 12), .SDcols = c("turnover_1", "turnover_2")] %>% 
   .[, (c("turnover_12m_mean_forward_1", "turnover_12m_mean_forward_2")) := lapply(.SD, RcppRoll::roll_meanl, n = 12), .SDcols = c("turnover_1", "turnover_2")] %>% 
   .[, tradingmonth := ceiling_date(tradingmonth, "m") -days(1)] %>% 
   .[]
+
+#< Write to the local database
+dbWriteTable(conn_macro,
+    "market_turnover_m_csmar",
+    value = market_turnover_m_csmar,
+    overwrite = TRUE
+  )
 ```

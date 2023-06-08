@@ -1,0 +1,4 @@
+"0","lty_10yr_m_cb <- gb_ts %>% "
+"0","  filter(tenure == ""10y"") %>% "
+"0","  select(-tenure) %>% "
+"0","  rename(lty = yield)"

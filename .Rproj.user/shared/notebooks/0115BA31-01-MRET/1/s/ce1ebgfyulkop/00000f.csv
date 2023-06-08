@@ -1,0 +1,8 @@
+"0","mkt_pfmc_m <- readxl::read_excel(market_pfmc_m_path) %>% "
+"0","  setlowercolnames() %>% "
+"0","  #< 117: 沪深京A股和创业板和科创板; 53: 沪深A股和创业板和科创板"
+"0","  filter(markettype == 117) %>% "
+"0","  mutate(tradingmonth = ymd(str_c(trdmnt, ""-01""))) %>% "
+"0","  select(tradingmonth, cmretwdos) %>% "
+"0","  mutate(cmretwdos = as.double(cmretwdos)) %>% "
+"0","  na.omit()"

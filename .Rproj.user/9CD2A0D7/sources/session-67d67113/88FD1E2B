@@ -3,7 +3,7 @@
     "path": "/Volumes/Samsung_T7/Research/点子王/update-时序数据更新/RMD/07-VALUATION.Rmd",
     "project_path": "07-VALUATION.Rmd",
     "type": "r_markdown",
-    "hash": "3382787370",
+    "hash": "0",
     "contents": "",
     "dirty": false,
     "created": 1686198049221.0,
@@ -11,14 +11,16 @@
     "relative_order": 8,
     "properties": {
         "source_window_id": "",
-        "Source": "Source"
+        "Source": "Source",
+        "cursorPosition": "18,0",
+        "scrollLine": "0"
     },
     "folds": "",
-    "lastKnownWriteTime": 1686196075,
+    "lastKnownWriteTime": 1686206377,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1686196075,
+    "last_content_update": 1686206377644,
     "read_only": false,
     "read_only_alternatives": []
 }

@@ -1,0 +1,6 @@
+"0","gby_m_cb <- sty_3m_m_cb %>% 
+  left_join(lty_10yr_m_cb) %>% 
+  left_join(termspread_m_cb)
+"
+"2","Joining with `by = join_by(tradingmonth)`"
+"2","Joining with `by = join_by(tradingmonth)`"

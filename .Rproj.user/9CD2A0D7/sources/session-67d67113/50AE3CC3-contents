@@ -34,4 +34,11 @@ cpi_m_csmar <- readxl::read_xlsx(cpi_path) %>%
   mutate(inflation = dplyr::lag(inflation, 1)) %>%
   na.omit() %>% 
   select(-cpi)
+
+#< Write to the local database
+dbWriteTable(conn_macro,
+    "cpi_m_csmar",
+    value = cpi_m_csmar,
+    overwrite = TRUE
+  )
 ```
